@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Ma Productivité</title>
+</head>
+<body class="dark">
+    <header>
+        <!--afichage date depuis JS  -->
+        <h1 id="date"></h1>
+        <!-- 📊 NOUVEAU: Lien vers la page de statistiques -->
+        <a href="stats.html" class="stats-link" title="Voir mes statistiques">📊 Stats</a>
+        <button id="theme-toggle" aria-label="Changer le thème">🌙</button>
+
+    </header>
+    <main>
+        <!-- Emplacement pour l'objectif du jour --> 
+        <section id="daily-goal">
+            <h2 id="objectif"><!-- Affichage objectif --></h2>
+            <button id="edit-objectif">Modifier l'objectif du moment</button>
+        </section>
+        <section id="timer">
+            <h2>Focus</h2>
+            <div id="time-display">25:00</div>
+            <div class="timer-controls">
+                <button id="start-timer">▶️</button>
+                <button id="pause-timer">⏸️</button>
+                <button id="reset-timer">🔄</button>
+            </div>
+        </section>
+
+        <section id="todoList">
+            <input type="text" id="new-todo" placeholder="nouvelle tâche">
+            <button id="add-todo">Ajouter</button>
+            <div id="filters">
+                <button data-filter="all">Toutes</button>
+                <button data-filter="todofilter">À faire</button>
+                <button data-filter="done">Faites</button>
+            </div>
+        <div id="todo"></div>
+        </section>
+    </main>
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>

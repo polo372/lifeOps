@@ -1,0 +1,513 @@
+/* =====================================================
+   VARIABLES DE THÈME - PAGE STATISTIQUES
+   Hérite des variables de style.css + ajoute des spécifiques
+===================================================== */
+:root {
+  /* Couleurs de base - Mode Clair */
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #4f46e5;
+  --border: #e5e7eb;
+  
+  /* Couleurs d'état */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  
+  /* Variables spécifiques aux graphiques */
+  --chart-bar: #818cf8;
+  --chart-bg: #e0e7ff;
+  --chart-hover: #6366f1;
+}
+
+body.dark {
+  /* Couleurs de base - Mode Sombre */
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --primary: #818cf8;
+  --border: #334155;
+  
+  /* Couleurs d'état - Mode Sombre */
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  
+  /* Variables graphiques - Mode Sombre */
+  --chart-bar: #818cf8;
+  --chart-bg: #1e293b;
+  --chart-hover: #a5b4fc;
+}
+
+/* =====================
+   BASE STYLES
+===================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =====================
+   HEADER
+===================== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  position: relative;
+  gap: 16px;
+}
+
+header h1 {
+  font-size: 28px;
+  text-align: center;
+  flex: 1;
+  color: var(--text);
+}
+
+/* Bouton de retour stylisé */
+.back-button {
+  padding: 10px 16px;
+  background: var(--card);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.back-button:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateX(-4px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+/* Bouton de thème */
+#theme-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  background: var(--primary);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+/* =====================
+   MAIN CONTAINER
+===================== */
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =====================
+   CARTES DE STATISTIQUES
+===================== */
+.stats-card {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  animation: slideUp 0.4s ease-out;
+}
+
+.stats-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.stats-card h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Animation d'entrée pour les cartes */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================
+   AFFICHAGE DE LA DATE
+===================== */
+.date-display {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* =====================
+   GRILLE DE STATISTIQUES
+   4 cartes alignées horizontalement
+===================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+/* Chaque élément de statistique */
+.stat-item {
+  background: linear-gradient(135deg, var(--chart-bg) 0%, var(--card) 100%);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.15);
+  border-color: var(--primary);
+}
+
+.stat-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 4px;
+  animation: countUp 0.6s ease-out;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* =====================
+   GRAPHIQUE EN BARRES
+   Visualisation de la semaine
+===================== */
+.chart-container {
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--bg);
+  border-radius: 12px;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 200px;
+  gap: 12px;
+}
+
+/* Chaque barre du graphique */
+.chart-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* La barre elle-même */
+.bar {
+  width: 100%;
+  background: var(--chart-bar);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  min-height: 4px;
+}
+
+.bar:hover {
+  background: var(--chart-hover);
+  transform: scaleY(1.05);
+  filter: brightness(1.2);
+  box-shadow: 0 -4px 16px rgba(129, 140, 248, 0.4);
+}
+
+/* Valeur affichée sur la barre */
+.bar-value {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* Label du jour sous la barre */
+.bar-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* =====================
+   RÉSUMÉ HEBDOMADAIRE
+===================== */
+.weekly-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.summary-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.summary-value {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* =====================
+   BADGES / ACCOMPLISSEMENTS
+===================== */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Chaque badge */
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+/* Badge débloqué */
+.badge.unlocked {
+  border-color: var(--success);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, var(--bg) 100%);
+}
+
+/* Badge verrouillé (grisé) */
+.badge.locked {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.badge-icon {
+  font-size: 32px;
+  min-width: 32px;
+}
+
+.badge-info {
+  flex: 1;
+}
+
+.badge-title {
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.badge-description {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* =====================
+   ACTIONS RAPIDES
+===================== */
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.action-btn {
+  padding: 14px 20px;
+  background: var(--card);
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* Bouton de suppression en rouge */
+.action-btn.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.action-btn.danger:hover {
+  background: var(--danger);
+  color: white;
+  border-color: var(--danger);
+}
+
+/* =====================
+   RESPONSIVE DESIGN
+   Adaptation mobile
+===================== */
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+  }
+
+  header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  header h1 {
+    font-size: 22px;
+    order: 1;
+    width: 100%;
+  }
+
+  .back-button {
+    order: 2;
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+
+  #theme-toggle {
+    order: 3;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .bar-chart {
+    height: 150px;
+    gap: 8px;
+  }
+
+  .weekly-summary {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .badges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    padding: 24px;
+  }
+
+  main {
+    max-width: 1100px;
+  }
+
+  .stats-card {
+    padding: 28px;
+  }
+}
